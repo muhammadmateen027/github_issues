@@ -9,6 +9,9 @@ class RouteGenerator {
     switch (setting.name) {
       case RoutesName.initial:
         return PageTransition.slideUpRoute(const IssuesPage());
+
+      case RoutesName.detail:
+        return PageTransition.slideUpRoute(const IssueDetail());
       default:
         return _errorRoute();
     }

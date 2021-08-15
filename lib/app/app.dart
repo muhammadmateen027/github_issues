@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,6 @@ import 'package:github_issues/github/github.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 import 'package:github_issues/routes/routes.dart';
 import 'package:github_issues/l10n/l10n.dart';
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 
 import 'theme_config.dart';
 
@@ -17,10 +17,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPlatformDark =
-        WidgetsBinding.instance!.window.platformBrightness == Brightness.dark;
-    final initTheme = isPlatformDark ? darkTheme : lightTheme;
-
     return RepositoryProvider.value(
       value: locator<RepositoryService>(),
       child: MultiBlocProvider(
@@ -31,11 +27,14 @@ class App extends StatelessWidget {
             )..add(LoadIssues()),
           ),
         ],
-        child: ThemeProvider(
-          initTheme: initTheme,
-          builder: (_, myTheme) {
+        child: AdaptiveTheme(
+          light: lightTheme,
+          dark: darkTheme,
+          initial: AdaptiveThemeMode.light,
+          builder: (theme, darkTheme) {
             return MaterialApp(
-              theme: myTheme,
+              theme: theme,
+              darkTheme: darkTheme,
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
