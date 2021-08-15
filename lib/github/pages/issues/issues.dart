@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +23,6 @@ class IssuesPage extends StatelessWidget {
               theme: brightness == Brightness.light ? darkTheme : lightTheme,
               reverseAnimation: brightness == Brightness.dark ? true : false,
             );
-            log('done');
           },
         );
       },
