@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:github_issues/github/github.dart';
-import 'package:github_issues/github/global/global.dart';
-import 'package:github_issues/github/pages/issues/bloc/enum/loading.dart';
 import 'package:github_issues/repository/repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

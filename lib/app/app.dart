@@ -7,6 +7,7 @@ import 'package:github_issues/config/config.dart';
 import 'package:github_issues/github/github.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 import 'package:github_issues/routes/routes.dart';
+import 'package:github_issues/l10n/l10n.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
