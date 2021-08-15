@@ -13,22 +13,25 @@ class IssueItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 2),
       decoration: BoxDecoration(
-          color: theme.colorScheme.onBackground,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 0.4,
-              blurRadius: 5.0,
-            )
-          ],
+        color: theme.colorScheme.background,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: theme.colorScheme.onBackground,
+            spreadRadius: 0.4,
+            blurRadius: 5.0,
+          )
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
             child: Center(
-              child: Icon(Icons.adjust, color: theme.primaryColor,),
+              child: Icon(
+                Icons.adjust,
+                color: theme.primaryColor,
+              ),
             ),
           ),
           Flexible(

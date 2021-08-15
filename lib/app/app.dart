@@ -8,12 +8,19 @@ import 'package:github_issues/github/github.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 import 'package:github_issues/routes/routes.dart';
 import 'package:github_issues/l10n/l10n.dart';
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+
+import 'theme_config.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final isPlatformDark =
+        WidgetsBinding.instance!.window.platformBrightness == Brightness.dark;
+    final initTheme = isPlatformDark ? darkTheme : lightTheme;
+
     return RepositoryProvider.value(
       value: locator<RepositoryService>(),
       child: MultiBlocProvider(
@@ -24,24 +31,26 @@ class App extends StatelessWidget {
             )..add(LoadIssues()),
           ),
         ],
-        child: MaterialApp(
-          theme: ThemeData(
-            accentColor: const Color(0xFF13B9FF),
-            appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-          ),
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          debugShowCheckedModeBanner: false,
-          // Added builder for toast and loading indicator
-          builder: EasyLoading.init(builder: BotToastInit()),
-          supportedLocales: AppLocalizations.supportedLocales,
-          // Set initial route name
-          initialRoute: RoutesName.initial,
-          //register navigator key to access in the app
-          navigatorKey: navigationService.navigationKey,
-          onGenerateRoute: RouteGenerator.generateRoute,
+        child: ThemeProvider(
+          initTheme: initTheme,
+          builder: (_, myTheme) {
+            return MaterialApp(
+              theme: myTheme,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+              // Added builder for toast and loading indicator
+              builder: EasyLoading.init(builder: BotToastInit()),
+              supportedLocales: AppLocalizations.supportedLocales,
+              // Set initial route name
+              initialRoute: RoutesName.initial,
+              //register navigator key to access in the app
+              navigatorKey: navigationService.navigationKey,
+              onGenerateRoute: RouteGenerator.generateRoute,
+            );
+          },
         ),
       ),
     );

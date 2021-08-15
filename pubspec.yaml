@@ -19,6 +19,7 @@ dependencies:
   freezed_annotation:
   json_serializable:
 
+  animated_theme_switcher:
   flutter_staggered_animations: ^1.0.0
   bot_toast: ^4.0.1
   bloc: ^7.0.0
