@@ -5,7 +5,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:github_issues/config/config.dart';
 import 'package:github_issues/github/github.dart';
-import 'package:github_issues/l10n/l10n.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 import 'package:github_issues/routes/routes.dart';
 
@@ -21,7 +20,7 @@ class App extends StatelessWidget {
           BlocProvider<IssuesBloc>(
             create: (_) => IssuesBloc(
               repository: locator<RepositoryService>(),
-            ),
+            )..add(LoadIssues()),
           ),
         ],
         child: MaterialApp(

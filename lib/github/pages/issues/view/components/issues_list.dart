@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:github_issues/github/github.dart';
 import 'package:github_issues/github/global/global.dart';
+import 'package:github_issues/github/pages/issues/bloc/enum/loading.dart';
 import 'package:github_issues/repository/repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -31,28 +32,19 @@ class _IssuesListState extends State<IssuesList> {
   Widget build(BuildContext context) {
     return BlocConsumer<IssuesBloc, IssuesState>(
       listener: (_, state) {
-        // if (state is EmptyJobs) {
-        //   _refreshController.resetNoData();
-        //   return;
-        // }
-        //
-        // if (state is JobsFailure) {
-        //   _refreshController.loadComplete();
-        //   return;
-        // }
-        //
-        // if (state is JobsLoaded) {
-        //   if (state.reachedMaximum) {
-        //     _refreshController.loadNoData();
-        //   } else {
-        //     _refreshController.loadComplete();
-        //   }
-        //
-        //   return;
-        // }
+        if (state is IssuesLoading) {
+          if (state.loadingState == LoadingState.refresh) {
+            _refreshController.resetNoData();
+          } else if (state.loadingState == LoadingState.ends) {
+            _refreshController.loadNoData();
+          } else {
+            _refreshController.loadComplete();
+          }
+          return;
+        }
       },
       buildWhen: (pre, curr) {
-        if (pre is IssuesLoaded || curr is IssuesLoaded) {
+        if (curr is IssuesLoaded) {
           return true;
         }
 
@@ -61,12 +53,9 @@ class _IssuesListState extends State<IssuesList> {
       builder: (_, state) {
         if (state is IssuesLoaded) {
           return SmartRefresher(
-            enablePullDown: true,
+            enablePullDown: false,
             enablePullUp: true,
-            header: const RefreshHeader(),
-            footer: const RefreshFooter(),
             controller: _refreshController,
-            onRefresh: _onRefresh,
             onLoading: _onLoading,
             child: _getList(state.issues),
           );
@@ -98,10 +87,6 @@ class _IssuesListState extends State<IssuesList> {
         },
       ),
     );
-  }
-
-  void _onRefresh() async {
-    issuesBloc.add(LoadIssues());
   }
 
   void _onLoading() async {

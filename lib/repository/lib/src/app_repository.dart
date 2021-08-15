@@ -18,13 +18,14 @@ class AppRepository implements RepositoryService {
   @override
   Future<List<IssueData>> loadIssues({
     String sort = 'created',
-    int index = 1,
+    String filter = 'all',
+    int page = 1,
   }) async {
     final queryParameters = <String, String>{
-      'filter': 'all',
+      'filter': filter,
       'sort': sort,
       'per_page': '10',
-      'page': '$index'
+      'page': '$page'
     };
 
     final response = await client.get(

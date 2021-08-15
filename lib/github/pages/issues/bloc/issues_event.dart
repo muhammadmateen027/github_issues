@@ -7,5 +7,10 @@ abstract class IssuesEvent extends Equatable {
 }
 
 class LoadIssues extends IssuesEvent {
+  LoadIssues({this.page = 1});
 
+  final int page;
+
+  @override
+  List<Object> get props => [page];
 }
