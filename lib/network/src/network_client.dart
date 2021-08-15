@@ -11,10 +11,6 @@ class NetworkClient {
   /// this Dio will be required
   final Dio dio;
 
-  /// We will set DIO options in this function like content type or tokens
-  void setDioOptions(String token) {
-    dio.options.contentType = Headers.jsonContentType;
-  }
 
   /// whenever we are require to call a GET method, we will use this function.
   /// We have flexibility to add other params
@@ -26,8 +22,6 @@ class NetworkClient {
         CancelToken? cancelToken,
         ProgressCallback? onReceiveProgress,
       }) async {
-    setDioOptions(token!);
-
     try {
       return await dio.get(
         url,

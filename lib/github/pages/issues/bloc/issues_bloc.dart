@@ -19,7 +19,9 @@ class IssuesBloc extends Bloc<IssuesEvent, IssuesState> {
 
     try {
       final issues = await repository.loadIssues();
-    } on NetworkException catch (error) {
+      emit(IssuesLoaded(issues: issues));
+      return;
+    } on NetworkException {
     }
   }
 }

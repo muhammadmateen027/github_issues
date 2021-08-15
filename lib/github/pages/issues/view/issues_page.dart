@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../issues.dart';
+import 'components/components.dart';
 
 class IssuesPage extends StatelessWidget {
   const IssuesPage({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class IssuesPage extends StatelessWidget {
         },
         child: const Icon(Icons.done),
       ),
+
+      body: const IssuesList(),
     );
   }
 }
