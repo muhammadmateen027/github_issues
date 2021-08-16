@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 import 'package:github_issues/routes/navigation_service.dart';
 import 'package:github_issues/routes/routes.dart';
-import 'package:intl/intl.dart';
 
 class IssueItem extends StatelessWidget {
   const IssueItem({Key? key, required this.issueData}) : super(key: key);
@@ -14,7 +13,10 @@ class IssueItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        navigationService.pushNamed(RoutesName.detail);
+        navigationService.pushNamed(
+          RoutesName.detail,
+          arguments: issueData.number,
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 2),
@@ -58,7 +60,7 @@ class IssueItem extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     '#${issueData.number!} opened at '
-                    '${_formatDate(issueData.updated_at!)}',
+                    '${IssueData.formatDate(issueData.updated_at!)}',
                   ),
                 ],
               ),
@@ -67,10 +69,5 @@ class IssueItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _formatDate(String updateAt) {
-    final formatter = DateFormat('yyyy-MM-dd');
-    return formatter.format(DateTime.parse(updateAt).toLocal());
   }
 }

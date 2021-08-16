@@ -11,17 +11,16 @@ class NetworkClient {
   /// this Dio will be required
   final Dio dio;
 
-
   /// whenever we are require to call a GET method, we will use this function.
   /// We have flexibility to add other params
   Future<Response> get(
-      String url,
-      String? token, {
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String url, {
+    String? token,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       return await dio.get(
         url,

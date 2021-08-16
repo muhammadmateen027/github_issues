@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:github_issues/network/network.dart';
 import 'package:github_issues/repository/lib/lib.dart';
 
@@ -21,24 +19,28 @@ class AppRepository implements RepositoryService {
     String filter = 'all',
     int page = 1,
   }) async {
-    final queryParameters = <String, String>{
+    final params = <String, String>{
       'filter': filter,
       'sort': sort,
       'per_page': '10',
       'page': '$page'
     };
 
-    final response = await client.get(
-      '/issues',
-      '',
-      queryParameters: queryParameters,
-    );
+    final response = await client.get('/issues', queryParameters: params);
 
     return await compute(_getIssues, response.data! as List);
   }
 
-  static
-  Future<List<IssueData>> _getIssues(List<dynamic> data) async {
+  /// Load flutter's issue detail while using id
+  @override
+  Future<IssueData> loadIssueDetail(int id) async {
+    final response = await client.get('/issues/$id');
+
+    return await compute(_getIssueDetail, response.data);
+  }
+
+  /// Isolate function to parse data in another thread
+  static Future<List<IssueData>> _getIssues(List<dynamic> data) async {
     var issues = <IssueData>[];
     if (data.isEmpty) {
       return issues;
@@ -50,5 +52,8 @@ class AppRepository implements RepositoryService {
 
     return issues;
   }
-}
 
+  static Future<IssueData> _getIssueDetail(dynamic data) async {
+    return IssueData.fromJson(data);
+  }
+}

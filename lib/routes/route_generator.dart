@@ -6,12 +6,15 @@ import 'transition_animation/transition_animation.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings setting) {
+    final args = setting.arguments;
     switch (setting.name) {
       case RoutesName.initial:
         return PageTransition.slideUpRoute(const IssuesPage());
 
       case RoutesName.detail:
-        return PageTransition.slideUpRoute(const IssueDetail());
+        return PageTransition.slideUpRoute(
+          IssueDetail(issueNumber: args as int),
+        );
       default:
         return _errorRoute();
     }

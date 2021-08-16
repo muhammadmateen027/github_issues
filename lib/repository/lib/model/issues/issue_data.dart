@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'issues.dart';
 import 'labels.dart';
 
@@ -39,4 +40,9 @@ class IssueData with _$IssueData {
 
   factory IssueData.fromJson(Map<String, dynamic> json) =>
       _$IssueDataFromJson(json);
+
+  static String formatDate(String updateAt) {
+    final formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(DateTime.parse(updateAt).toLocal());
+  }
 }

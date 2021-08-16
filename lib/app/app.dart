@@ -26,6 +26,9 @@ class App extends StatelessWidget {
               repository: locator<RepositoryService>(),
             )..add(LoadIssues()),
           ),
+          BlocProvider<IssueDetailBloc>(
+            create: (_) => IssueDetailBloc(locator<RepositoryService>()),
+          ),
         ],
         child: AdaptiveTheme(
           light: lightTheme,
