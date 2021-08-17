@@ -54,7 +54,7 @@ class IssueItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    issueData.body!,
+                    issueData.body ?? '',
                     maxLines: 1,
                   ),
                   const SizedBox(height: 8),
