@@ -88,6 +88,7 @@ class _IssuesListState extends State<IssuesList> {
   }
 
   void _onLoading() async {
+    await _refreshController.requestLoading();
     issuesBloc.add(LoadIssues());
   }
 

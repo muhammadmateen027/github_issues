@@ -14,3 +14,13 @@ class LoadIssues extends IssuesEvent {
   @override
   List<Object> get props => [page];
 }
+
+class FilterIssues extends IssuesEvent {
+  FilterIssues({this.filterType, this.sortType});
+
+  final Option? filterType;
+  final Option? sortType;
+
+  @override
+  List<Object> get props => [filterType!, sortType!];
+}

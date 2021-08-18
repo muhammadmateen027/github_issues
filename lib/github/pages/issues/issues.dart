@@ -1,7 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:github_issues/github/github.dart';
 
 import 'components/components.dart';
 
@@ -21,10 +19,8 @@ class _IssuesPageState extends State<IssuesPage> {
         leading: _themeSwitcherButton(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<IssuesBloc>().add(LoadIssues());
-        },
-        child: const Icon(Icons.done),
+        onPressed: showFilter,
+        child: const Icon(Icons.filter_list),
       ),
       body: const IssuesList(),
     );
@@ -36,6 +32,14 @@ class _IssuesPageState extends State<IssuesPage> {
       onPressed: () {
         AdaptiveTheme.of(context).toggleThemeMode();
       },
+    );
+  }
+
+  void showFilter() {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      builder: (_) => const FilterView(),
     );
   }
 }
