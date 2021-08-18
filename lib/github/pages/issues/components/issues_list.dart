@@ -11,7 +11,7 @@ class IssuesList extends StatefulWidget {
   const IssuesList({Key? key}) : super(key: key);
 
   @override
-  _IssuesListState createState ()=> _IssuesListState();
+  _IssuesListState createState() => _IssuesListState();
 }
 
 class _IssuesListState extends State<IssuesList> {
@@ -35,10 +35,15 @@ class _IssuesListState extends State<IssuesList> {
             _refreshController.resetNoData();
           } else if (state.loadingState == LoadingState.ends) {
             _refreshController.loadNoData();
+          } else if (state.loadingState == LoadingState.more) {
+            _refreshController.requestLoading();
           } else {
             _refreshController.loadComplete();
           }
           return;
+        }
+        if (state is IssuesLoaded) {
+          _refreshController.loadComplete();
         }
       },
       buildWhen: (pre, curr) {
@@ -87,9 +92,7 @@ class _IssuesListState extends State<IssuesList> {
     );
   }
 
-  void _onLoading() async {
-    await _refreshController.requestLoading();
+  void _onLoading() {
     issuesBloc.add(LoadIssues());
   }
-
 }
