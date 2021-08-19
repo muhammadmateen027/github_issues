@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:github_issues/github/github.dart';
 import 'package:github_issues/repository/lib/model/issues/issue_data.dart';
+import 'package:github_issues/l10n/l10n.dart';
 
 class IssueDetail extends StatefulWidget {
   const IssueDetail({Key? key, required this.issueNumber}) : super(key: key);
@@ -23,10 +24,11 @@ class _IssueDetailState extends State<IssueDetail> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final l10n = context.l10n;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Issue detail'),
+        title: Text(l10n.issueDetailLabel),
       ),
       body: BlocConsumer<IssueDetailBloc, IssueDetailState>(
         listener: (_, state) {},

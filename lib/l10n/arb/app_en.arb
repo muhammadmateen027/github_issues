@@ -11,5 +11,13 @@
     "pageNotAvailableDescription": "You requested page is not available at the moment.",
     "@pageNotAvailableDescription": {
         "description": "If requested page is not available then this description will be used in a default page."
+    },
+    "issuesLabel": "Issues",
+    "@IssuesLabel": {
+        "description": "Appbar title for the list of issues"
+    },
+    "issueDetailLabel": "Issue detail",
+    "@IssueDetailLabel": {
+        "description": "Appbar title for the list of issue detail"
     }
 }
