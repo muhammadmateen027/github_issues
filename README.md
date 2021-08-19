@@ -28,10 +28,21 @@ In this project we will discuss:
 
 ## Problem 💥
 Build an application to load flutter related issues from github and navigate to the detail page on selected issues.
-In detail page, preview the actual issue and the status of issue.
+In the detail page, preview the actual issue with the status.
 
 ## Solution 💪
 The solution is design so user can have nice experience and can scroll infinite.
+
+<table>
+  <tr>
+    <td> <img src="https://user-images.githubusercontent.com/24449076/130081438-ae209bdd-df40-42ea-bdea-73666a77bb87.png" title="Issues list" width="180" height="350" /></td>
+    <td> <img src="https://user-images.githubusercontent.com/24449076/130081470-e1e029fc-0dd6-4f50-adf0-0acfa4a37486.png" title="Issues" width="180" height="350" /></td>
+   </tr> 
+ <tr>
+    <td> <img src="https://user-images.githubusercontent.com/24449076/130081494-94a273ff-2a3a-43b3-b3ed-15daf37c730c.png" title="Issue list" width="180" height="350" /></td>
+    <td> <img src="https://user-images.githubusercontent.com/24449076/130081520-fa78d419-8d10-4a25-90ba-e1187c80330c.png" title="Issues" width="180" height="350" /></td>
+   </tr> 
+</table>
 
 > You will notice a full page loading indicator. It's just for showing that, if we build a common Builder then we can
 > use in Interceptor and can be shown whenever required.
