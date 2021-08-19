@@ -11,6 +11,12 @@ class IssueItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    var icon = Icon(Icons.adjust, color: theme.primaryColor);
+
+    if (issueData.state == 'closed') {
+      icon = Icon(Icons.close, color: theme.primaryColor);
+    }
+
     return GestureDetector(
       onTap: () {
         navigationService.pushNamed(
@@ -34,14 +40,7 @@ class IssueItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Flexible(
-              child: Center(
-                child: Icon(
-                  Icons.adjust,
-                  color: theme.primaryColor,
-                ),
-              ),
-            ),
+            Flexible(child: Center(child: icon)),
             Flexible(
               flex: 7,
               child: Column(
